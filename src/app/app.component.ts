@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component , Injector} from '@angular/core';
+import { createCustomElement } from '@angular/elements';
+import { MyElementComponent } from './my-element/my-element.component';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'v8-app';
+  constructor(private injector:Injector){
+
+  }
+  ngOnInit(){
+    let ele = createCustomElement(MyElementComponent,
+      {injector:this.injector});
+    customElements.define('my-ele',ele);
+  }
 }
